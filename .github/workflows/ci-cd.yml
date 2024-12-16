@@ -18,7 +18,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '16'  # Update to a more recent version
+        node-version: '16'  # Use a compatible Node.js version
 
     - name: Install dependencies
       run: |
@@ -26,7 +26,7 @@ jobs:
 
     - name: Lint with ESLint
       run: |
-        npx eslint .
+        npm run lint
 
     - name: Test with Jest
       run: |
