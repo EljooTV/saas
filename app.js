@@ -52,4 +52,4 @@ app.delete('/delete_user/:email', (req, res) => {
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
-});
+}); 
