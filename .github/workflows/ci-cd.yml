@@ -25,14 +25,16 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # Step 4: Grant execute permission to ESLint binary
-      - name: Fix ESLint permissions
-        run: chmod +x ./node_modules/.bin/eslint
+      # Step 4: Fix permissions for ESLint and Jest
+      - name: Fix ESLint and Jest permissions
+        run: |
+          chmod +x ./node_modules/.bin/eslint
+          chmod +x ./node_modules/.bin/jest
 
       # Step 5: Run ESLint
       - name: Run ESLint
         run: npm run lint
 
-      # Step 6: Run Jest tests
+      # Step 6: Run tests with Jest
       - name: Run tests with Jest
         run: npm test
