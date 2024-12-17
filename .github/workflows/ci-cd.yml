@@ -2,34 +2,37 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
   pull_request:
-    branches: [ master ]
-  schedule:
-    - cron: '0 0 * * *'  # Nightly runs
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      # Step 1: Checkout the repository code
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '16'  # Use a compatible Node.js version
+      # Step 2: Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
 
-    - name: Install dependencies
-      run: |
-        npm install
+      # Step 3: Install project dependencies
+      - name: Install dependencies
+        run: npm install
 
-    - name: Install ESLint globally
-      run: |
-        npm install -g eslint
+      # Step 4: Grant execute permission to ESLint
+      - name: Grant execute permission to ESLint
+        run: chmod +x ./node_modules/.bin/eslint
 
-    - name: Lint with ESLint
-      run: |
-        eslint .
+      # Step 5: Run ESLint for linting
+      - name: Lint with ESLint
+        run: npm run lint
 
-    - name: Test with Je
+      # Step 6: Run Jest tests
+      - name: Test with Jest
+        run: npm test
