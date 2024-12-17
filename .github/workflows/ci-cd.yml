@@ -11,28 +11,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the repository code
+      # Step 1: Checkout the code
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Step 2: Set up Node.js environment
+      # Step 2: Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
 
-      # Step 3: Install project dependencies
+      # Step 3: Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # Step 4: Grant execute permission to ESLint
-      - name: Grant execute permission to ESLint
+      # Step 4: Grant execute permission to ESLint binary
+      - name: Fix ESLint permissions
         run: chmod +x ./node_modules/.bin/eslint
 
-      # Step 5: Run ESLint for linting
-      - name: Lint with ESLint
+      # Step 5: Run ESLint
+      - name: Run ESLint
         run: npm run lint
 
       # Step 6: Run Jest tests
-      - name: Test with Jest
+      - name: Run tests with Jest
         run: npm test
